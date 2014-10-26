@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>websocket-test.0.1</title>
+</head>
+<body>
+<script type="text/javascript">
+	alert("111");
+	var websock;
+	var req_seq;
+	if(!websock||websock.readyState===undefined||websock.readyState>1){
+		/**
+		* websocket的属性：readyState和bufferedAmount
+		* readyState取值：0-正在连接；1-连接成功；2-正在进行关闭；3-已经关闭
+		* bufferedAmount有多少数据等待发送
+		*/
+		alert("222");
+		//var wsUrl="ws://localhost:8088/zendStudio/websocket/index.php";
+		var wsUrl="ws://localhost:8088/zendStudio/websocket/index.php";
+		//
+		websock = new WebSocket(wsUrl);
+		
+		websock.onopen=function(event){
+			alert("333");
+			//websock.send("I am the client and I am listening!");			
+		}	
+		websock.onmessage = function(event){
+			/*var data=JSON.parse(event.data);
+			req_seq=data.req_seq;*/
+			//console.log(event.data);
+			document.write("message:"+event.data);
+		}
+		
+		websock.onerror=function(event){
+			//console.log(event.data);
+			document.write("error:"+event.data+"</br>");
+		}
+		
+		websock.onclose=function(event){
+			//console.log("webSocket close");
+			document.write("webSocket close");
+		}
+		
+	}
+	
+</script>
+</body>
+</html>
